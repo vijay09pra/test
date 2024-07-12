@@ -15,24 +15,22 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Footer
+ * Version details
  *
  * @package   theme_adaptable
  * @copyright 2015-2019 Jeremy Hopkins (Coventry University)
  * @copyright 2015-2019 Fernando Acedo (3-bits.com)
  * @copyright 2017-2019 Manoj Solanki (Coventry University)
- * @license   https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later.
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ *
  */
 defined('MOODLE_INTERNAL') || die;
 
 if ($ADMIN->fulltree) {
-    $page = new \theme_adaptable\admin_settingspage('theme_adaptable_footer', get_string('footersettings', 'theme_adaptable'));
+    $page = new admin_settingpage('theme_adaptable_footer', get_string('footersettings', 'theme_adaptable'));
 
-    $page->add(new admin_setting_heading(
-        'theme_adaptable_footer',
-        get_string('footersettingsheading', 'theme_adaptable'),
-        format_text(get_string('footerdesc', 'theme_adaptable'), FORMAT_MARKDOWN)
-    ));
+    $page->add(new admin_setting_heading('theme_adaptable_footer', get_string('footersettingsheading', 'theme_adaptable'),
+        format_text(get_string('footerdesc', 'theme_adaptable'), FORMAT_MARKDOWN)));
 
     // Show moodle docs link.
     $name = 'theme_adaptable/moodledocs';
@@ -45,11 +43,11 @@ if ($ADMIN->fulltree) {
     $name = 'theme_adaptable/footerblocksplacement';
     $title = get_string('footerblocksplacement', 'theme_adaptable');
     $description = get_string('footerblocksplacementdesc', 'theme_adaptable');
-    $choices = [
+    $choices = array(
         1 => get_string('footerblocksplacement1', 'theme_adaptable'),
         2 => get_string('footerblocksplacement2', 'theme_adaptable'),
         3 => get_string('footerblocksplacement3', 'theme_adaptable'),
-    ];
+    );
     $setting = new admin_setting_configselect($name, $title, $description, 1, $choices);
     $page->add($setting);
 
@@ -80,7 +78,7 @@ if ($ADMIN->fulltree) {
         }
 
         if ($footersetting != '0-0-0-0') {
-            $imgblder .= '<img src="' . $imgpath . $footersetting . '.png" style="padding-top: 5px">';
+            $imgblder .= '<img src="'.$imgpath.$footersetting.'.png" style="padding-top: 5px">';
         }
 
         $vals = explode('-', $footersetting);
@@ -91,11 +89,8 @@ if ($ADMIN->fulltree) {
         }
     }
 
-    $page->add(new admin_setting_heading(
-        'theme_adaptable_footerlayoutcheck',
-        get_string('layoutcheck', 'theme_adaptable'),
-        format_text(get_string('layoutcheckdesc', 'theme_adaptable'), FORMAT_MARKDOWN)
-    ));
+    $page->add(new admin_setting_heading('theme_adaptable_footerlayoutcheck', get_string('layoutcheck', 'theme_adaptable'),
+                    format_text(get_string('layoutcheckdesc', 'theme_adaptable'), FORMAT_MARKDOWN)));
 
     $page->add(new admin_setting_heading('theme_adaptable_footerlayoutbuilder', '', $imgblder));
 
@@ -103,11 +98,8 @@ if ($ADMIN->fulltree) {
     $blkcontmsg .= $totalblocks;
     $blkcontmsg .= get_string('layoutaddcontentdesc2', 'theme_adaptable');
 
-    $page->add(new admin_setting_heading(
-        'theme_adaptable_footerlayoutaddcontent',
-        get_string('layoutaddcontent', 'theme_adaptable'),
-        format_text($blkcontmsg, FORMAT_MARKDOWN)
-    ));
+    $page->add(new admin_setting_heading('theme_adaptable_footerlayoutaddcontent',
+        get_string('layoutaddcontent', 'theme_adaptable'), format_text($blkcontmsg, FORMAT_MARKDOWN)));
 
     for ($i = 1; $i <= $totalblocks; $i++) {
         $name = 'theme_adaptable/footer' . $i . 'header';
@@ -129,10 +121,10 @@ if ($ADMIN->fulltree) {
     $name = 'theme_adaptable/hidefootersocial';
     $title = get_string('hidefootersocial', 'theme_adaptable');
     $description = get_string('hidefootersocialdesc', 'theme_adaptable');
-    $radchoices = [
+    $radchoices = array(
         0 => get_string('hide', 'theme_adaptable'),
         1 => get_string('show', 'theme_adaptable'),
-    ];
+    );
     $setting = new admin_setting_configselect($name, $title, $description, 1, $radchoices);
     $page->add($setting);
 
@@ -140,10 +132,10 @@ if ($ADMIN->fulltree) {
     $name = 'theme_adaptable/gdprbutton';
     $title = get_string('gdprbutton', 'theme_adaptable');
     $description = get_string('gdprbuttondesc', 'theme_adaptable');
-    $radchoices = [
+    $radchoices = array(
         'none' => get_string('hide', 'theme_adaptable'),
         'inline' => get_string('show', 'theme_adaptable'),
-    ];
+    );
     $setting = new admin_setting_configselect($name, $title, $description, 1, $radchoices);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);

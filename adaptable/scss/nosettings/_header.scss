@@ -29,11 +29,8 @@
     background-size: cover;
 }
 
-#headertitle,
-#sitetitle {
-    img {
-        max-height: 107px;
-        max-width: 100%;
-        width: auto;
-    }
+#sitetitle img {
+    max-height: 107px;
+    max-width: 100%;
+    width: auto;
 }

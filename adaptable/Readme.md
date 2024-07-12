@@ -1,5 +1,6 @@
 Adaptable - the most adaptable moodle theme
 ===========================================
+
 Adaptable is a highly customizable responsive two column moodle theme based on the popular BCU theme adding:
 
 - Customizable fonts (Google Fonts)
@@ -47,16 +48,17 @@ This theme has been developed by the following:
 - Manoj Solanki (Coventry University)
 - G J Barnard MSc. BSc(Hons)(Sndw). MBCS. CEng. CITP. PGCE.
 
-Required release of Moodle
+Required version of Moodle
 ==========================
-This version works with Moodle 4.3 version 2023100900.00 (Build: 20231009) and above within the MOODLE_403_STABLE branch until the
+This version works with Moodle 4.0 version 2022041900.00 (Build: 20220419) and above within the MOODLE_400_STABLE branch until the
 next release.
 
-Please ensure that your hardware and software complies with 'Requirements' in '[Installing Moodle](https://docs.moodle.org/403/en/Installing_Moodle)'.
+Please ensure that your hardware and software complies with 'Requirements' in 'Installing Moodle' on
+'https://docs.moodle.org/400/en/Installing_Moodle'.
 
 Installation
 ============
- 1. Ensure you have the release of Moodle as stated above in 'Required release of Moodle'.  This is essential as the
+ 1. Ensure you have the version of Moodle as stated above in 'Required version of Moodle'.  This is essential as the
     theme relies on underlying core code that is out of my control.
  2. Login as an administrator and put Moodle in 'Maintenance Mode' so that there are no users using it bar you as the administrator.
  3. Copy the extracted 'adaptable' folder to the '/theme/' folder.
@@ -66,7 +68,7 @@ Installation
 
 Upgrading
 =========
- 1. Ensure you have the release of Moodle as stated above in 'Required release of Moodle'.  This is essential as the
+ 1. Ensure you have the version of Moodle as stated above in 'Required version of Moodle'.  This is essential as the
     theme relies on underlying core code that is out of my control.
  2. Login as an administrator and put Moodle in 'Maintenance Mode' so that there are no users using it bar you as the administrator.
  3. Make a backup of your old 'adaptable' folder in '/theme/' and then delete the folder.
@@ -86,10 +88,10 @@ Uninstallation
 
 Versioning
 ==========
-Adaptable is maintained under the Semantic Versioning 2.0.0 guidelines as much as possible. Releases will be numbered with the
+Adaptable is maintained under the Semantic Versioning guidelines as much as possible. Releases will be numbered with the
 following format:
 
-major.minor.patch
+moodleversion.major.minor.(patch)
 
 and following these guidelines:
 
@@ -102,6 +104,9 @@ For more information on SemVer, please visit http://semver.org.
 
 Acknowledgments
 ===============
+Big thanks to all the volunteers that are collaborating and testing Adaptable continuously. We really appreciate your help and
+support to develop the most adaptable theme for moodle.
+
 Development contributions from:
 
 - Justin Hunt
@@ -125,6 +130,13 @@ Translation:
 
 - GermÃ¡n Valero (EspaÃ±ol - MÃ©xico)
 - Jordi Rodilla (CatalÃ   - Andorra)
+
+
+Contributions
+=============
+You are welcome to collaborate in the project. You can fix bugs, add new features or help in the translation to your language.
+See CONTRIBUTING.txt for more information
+
 
 Licenses
 ========

@@ -18,16 +18,22 @@
  * Put properties with validation setting.
  *
  * @package    theme_adaptable
- * @copyright  2018 G J Barnard
- *               {@link https://moodle.org/user/profile.php?id=442195}
- *               {@link https://gjbarnard.co.uk}
- * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later.
+ * @copyright  &copy; 2018 G J Barnard.
+ * @author     G J Barnard - {@link http://moodle.org/user/profile.php?id=442195}
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+defined('MOODLE_INTERNAL') || die;
 
 /**
  * Set properties class.
+ *
+ * @package   theme_adaptable
+ * @copyright &copy; 2018 G J Barnard.
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class adaptable_admin_setting_putprops extends admin_setting_configtextarea {
+
     /** @var string Name of the theme. */
     private $themename;
     /** @var string Name of the 'callable' function to call with the name of the theme and the properties as an array. */
@@ -118,7 +124,7 @@ class adaptable_admin_setting_putprops extends admin_setting_configtextarea {
      *
      * @return string Returns an HTML string
      */
-    public function output_html($data, $query = '') {
+    public function output_html($data, $query='') {
         $return = parent::output_html($data, $query);
 
         return $return;

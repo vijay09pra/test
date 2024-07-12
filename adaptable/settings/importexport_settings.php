@@ -18,15 +18,14 @@
  * Import / Export settings.
  *
  * @package    theme_adaptable
- * @copyright  2018 G J Barnard
- *               {@link https://moodle.org/user/profile.php?id=442195}
- *               {@link https://gjbarnard.co.uk}
- * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later.
+ * @copyright  &copy; 2018 G J Barnard.
+ * @author     G J Barnard - {@link http://moodle.org/user/profile.php?id=442195}
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die;
 
-$page = new \theme_adaptable\admin_settingspage('theme_adaptable_importexport', get_string('properties', 'theme_adaptable'));
+$page = new admin_settingpage('theme_adaptable_importexport', get_string('properties', 'theme_adaptable'));
 if ($ADMIN->fulltree) {
     if (file_exists("{$CFG->dirroot}/theme/adaptable/settings/adaptable_admin_setting_getprops.php")) {
         require_once($CFG->dirroot . '/theme/adaptable/settings/adaptable_admin_setting_getprops.php');
@@ -36,16 +35,13 @@ if ($ADMIN->fulltree) {
         require_once($CFG->themedir . '/adaptable/settings/adaptable_admin_setting_putprops.php');
     }
 
-    $page->add(new admin_setting_heading(
-        'theme_adaptable_importexport',
+    $page->add(new admin_setting_heading('theme_adaptable_importexport',
         get_string('propertiessub', 'theme_adaptable'),
-        format_text(get_string('propertiesdesc', 'theme_adaptable'), FORMAT_MARKDOWN)
-    ));
+        format_text(get_string('propertiesdesc', 'theme_adaptable'), FORMAT_MARKDOWN)));
 
     $adaptableexportprops = optional_param('theme_adaptable_getprops_saveprops', 0, PARAM_INT);
     $adaptableprops = \theme_adaptable\toolbox::compile_properties('adaptable');
-    $page->add(new adaptable_admin_setting_getprops(
-        'theme_adaptable_getprops',
+    $page->add(new adaptable_admin_setting_getprops('theme_adaptable_getprops',
         get_string('propertiesproperty', 'theme_adaptable'),
         get_string('propertiesvalue', 'theme_adaptable'),
         $adaptableprops,
@@ -61,8 +57,7 @@ if ($ADMIN->fulltree) {
     $setting = new admin_setting_heading($name, $heading, '');
     $page->add($setting);
 
-    $setting = new adaptable_admin_setting_putprops(
-        'theme_adaptable_putprops',
+    $setting = new adaptable_admin_setting_putprops('theme_adaptable_putprops',
         get_string('putpropertiesname', 'theme_adaptable'),
         get_string('putpropertiesdesc', 'theme_adaptable'),
         'adaptable',

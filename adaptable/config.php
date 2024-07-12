@@ -15,16 +15,15 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Config
+ * Version details
  *
- * @package    theme_adaptable
- * @copyright  2015-2019 Jeremy Hopkins (Coventry University)
- * @copyright  2015-2019 Fernando Acedo (3-bits.com)
- * @copyright  2017-2019 Manoj Solanki (Coventry University)
- * @copyright  2019 G J Barnard
- *               {@link https://moodle.org/user/profile.php?id=442195}
- *               {@link https://gjbarnard.co.uk}
- * @license   https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later.
+ * @package   theme_adaptable
+ * @copyright 2015-2019 Jeremy Hopkins (Coventry University)
+ * @copyright 2015-2019 Fernando Acedo (3-bits.com)
+ * @copyright 2017-2019 Manoj Solanki (Coventry University)
+ * @copyright 2019-onwards G J Barnard - {@link http://moodle.org/user/profile.php?id=442195}
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ *
  */
 
 defined('MOODLE_INTERNAL') || die();
@@ -34,8 +33,16 @@ global $PAGE;
 // The plugin internal name.
 $THEME->name = 'adaptable';
 
+/* Set up regions for individual pages.  This is done
+   to avoid being able to move regions (when configuring)
+   to non-existent block regions for the page .  This is because
+   Moodle shows all regions available even if they aren't used
+   on that specific page. Please note that frontpage and dashboard
+   page use $frontlayoutregions to avoid losing existing regions that
+   are renamed. */
+
 // The frontpage regions.
-$frontlayoutregions = [
+$frontlayoutregions = array(
     'side-post',
     'frnt-footer',
     'frnt-market-a',
@@ -58,17 +65,16 @@ $frontlayoutregions = [
     'frnt-market-r',
     'frnt-market-s',
     'frnt-market-t',
-    'information',
     'news-slider-a',
     'course-tab-one-a',
     'course-tab-two-a',
     'my-tab-one-a',
     'my-tab-two-a',
-    'course-section-a',
-];
+    'course-section-a'
+);
 
 // The course page regions.
-$courselayoutregions = [
+$courselayoutregions = array(
     'side-post',
     'frnt-footer',
     'course-top-a',
@@ -84,10 +90,28 @@ $courselayoutregions = [
     'course-bottom-b',
     'course-bottom-c',
     'course-bottom-d',
-    'course-section-a',
-];
+    'course-section-a'
+);
 
-$standardregions = ['side-post'];
+$standardregions = array('side-post');
+$regions = $standardregions;
+
+if ( (is_object($PAGE)) && ($PAGE->pagelayout) ) {
+    switch ($PAGE->pagelayout) {
+        case "frontpage":
+            $regions = $frontlayoutregions;
+            break;
+        case "mycourses":
+            $regions = $courselayoutregions;
+            break;
+        case "mydashboard":
+            $regions = $frontlayoutregions;
+            break;
+        case "course":
+            $regions = $courselayoutregions;
+            break;
+    }
+}
 
 // The theme HTML DOCTYPE.
 $THEME->doctype = 'html5';
@@ -96,19 +120,19 @@ $THEME->doctype = 'html5';
 $THEME->parents = ['boost'];
 
 // Styles.
-$THEME->sheets = [
-    'custom',
-];
+$THEME->sheets = array(
+    'custom'
+);
 
 $THEME->supportscssoptimisation = false;
-$THEME->yuicssmodules = [];
-$THEME->editor_sheets = [];
+$THEME->yuicssmodules = array();
+$THEME->editor_sheets = array();
 
-$THEME->plugins_exclude_sheets = [
-    'block' => [
+$THEME->plugins_exclude_sheets = array(
+    'block' => array(
         'html',
-    ],
-];
+    )
+);
 
 // Disabling block docking.
 $THEME->enable_dock = false;
@@ -117,138 +141,136 @@ $THEME->enable_dock = false;
 $THEME->rendererfactory = 'theme_overridden_renderer_factory';
 
 // Load the theme layouts.
-$THEME->layouts = [
+$THEME->layouts = array(
     // Most backwards compatible layout without the blocks - this is the layout used by default.
-    'base' => [
+    'base' => array(
         'file' => 'columns2.php',
-        'regions' => [],
-    ],
+        'regions' => array(),
+    ),
     // Standard layout with blocks, this is recommended for most pages with general information.
-    'standard' => [
+    'standard' => array(
         'file' => 'columns2.php',
-        'regions' => $standardregions,
+        'regions' => array('side-post'),
         'defaultregion' => 'side-post',
-    ],
+    ),
     // Main course page.
-    'course' => [
+    'course' => array(
         'file' => 'course.php',
-        'regions' => $courselayoutregions,
+        'regions' => $regions,
         'defaultregion' => 'side-post',
-        'options' => ['langmenu' => true],
-    ],
-    'coursecategory' => [
+        'options' => array('langmenu' => true),
+    ),
+    'coursecategory' => array(
         'file' => 'columns2.php',
-        'regions' => $standardregions,
+        'regions' => array('side-post'),
         'defaultregion' => 'side-post',
-    ],
+    ),
     // Part of course, typical for modules - default page layout if $cm specified in require_login().
-    'incourse' => [
+    'incourse' => array(
         'file' => 'columns2.php',
-        'regions' => array_merge($standardregions, ['course-section-a']),
+        'regions' => array('side-post', 'course-section-a'),
         'defaultregion' => 'side-post',
-    ],
+    ),
     // The site home page.
-    'frontpage' => [
+    'frontpage' => array(
         'file' => 'frontpage.php',
-        'regions' => $frontlayoutregions,
-        'defaultregion' => 'side-post',
-    ],
+        'regions' => $regions,
+        'defaultregion' => 'side-post'
+    ),
     // Server administration scripts.
-    'admin' => [
+    'admin' => array(
         'file' => 'columns2.php',
-        'regions' => $standardregions,
-        'defaultregion' => 'side-post',
+        'regions' => array('side-post'),
+        'defaultregion' => 'side-post'
 
-    ],
+    ),
     // My courses page.
-    'mycourses' => [
+    'mycourses' => array(
         'file' => 'dashboard.php',
-        'regions' => $courselayoutregions,
+        'regions' => $regions,
         'defaultregion' => 'side-post',
-        'options' => ['langmenu' => true],
-    ],
+        'options' => array('langmenu' => true),
+    ),
     // My dashboard page.
-    'mydashboard' => [
+    'mydashboard' => array(
         'file' => 'dashboard.php',
-        'regions' => array_merge($frontlayoutregions, ['content']),
+        'regions' => $regions,
         'defaultregion' => 'side-post',
-        'options' => ['langmenu' => true],
-    ],
+        'options' => array('langmenu' => true),
+    ),
     // My public page.
-    'mypublic' => [
+    'mypublic' => array(
         'file' => 'columns2.php',
-        'regions' => $standardregions,
-        'defaultregion' => 'side-post',
-    ],
+        'regions' => array('side-post'),
+        'defaultregion' => 'side-post'
+    ),
     // Login page.
-    'login' => [
+    'login' => array(
         'file' => 'login.php',
-        'regions' => [],
-        'options' => ['langmenu' => true, 'nonavbar' => true],
-    ],
+        'regions' => array(),
+        'options' => array('langmenu' => true, 'nonavbar' => true),
+    ),
     // Pages that appear in pop-up windows - no navigation, no blocks, no header.
-    'popup' => [
+    'popup' => array(
         'file' => 'columns1.php',
-        'regions' => [],
-        'options' => ['nofooter' => true, 'nonavbar' => true],
-    ],
+        'regions' => array(),
+        'options' => array('nofooter' => true, 'nonavbar' => true),
+    ),
     // No blocks and minimal footer - used for legacy frame layouts only!
-    'frametop' => [
+    'frametop' => array(
         'file' => 'columns1.php',
-        'regions' => [],
-        'options' => ['nofooter' => true, 'nocoursefooter' => true],
-    ],
+        'regions' => array(),
+        'options' => array('nofooter' => true, 'nocoursefooter' => true),
+    ),
     // Embeded pages, like iframe/object embeded in moodleform - it needs as much space as possible.
-    'embedded' => [
+    'embedded' => array(
         'file' => 'embedded.php',
-        'regions' => [],
-    ],
+        'regions' => array()
+    ),
     /* Used during upgrade and install, and for the 'This site is undergoing maintenance' message.
        This must not have any blocks, and it is good idea if it does not have links to
        other places - for example there should not be a home link in the footer... */
-    'maintenance' => [
+    'maintenance' => array(
         'file' => 'maintenance.php',
-        'regions' => [],
-        'options' => ['nofooter' => true, 'nonavbar' => true, 'nocoursefooter' => true, 'nocourseheader' => true],
-    ],
+        'regions' => array(),
+        'options' => array('nofooter' => true, 'nonavbar' => true, 'nocoursefooter' => true, 'nocourseheader' => true),
+    ),
     // Should display the content and basic headers only.
-    'print' => [
+    'print' => array(
         'file' => 'columns1.php',
-        'regions' => [],
-        'options' => ['nofooter' => true, 'nonavbar' => false],
-    ],
+        'regions' => array(),
+        'options' => array('nofooter' => true, 'nonavbar' => false),
+    ),
     // The pagelayout used when a redirection is occuring.
-    'redirect' => [
+    'redirect' => array(
         'file' => 'embedded.php',
-        'regions' => [],
-    ],
+        'regions' => array(),
+    ),
     // The pagelayout used for reports.
-    'report' => [
+    'report' => array(
         'file' => 'columns2.php',
-        'regions' => $standardregions,
+        'regions' => array('side-post'),
         'defaultregion' => 'side-post',
-    ],
+    ),
     // The pagelayout used for safebrowser and securewindow.
-    'secure' => [
+    'secure' => array(
         'file' => 'secure.php',
-        'regions' => array_merge($standardregions, ['course-section-a']),
-        'options' => ['nofooter' => true, 'nonavbar' => true],
+        'regions' => array('side-post', 'course-section-a'),
+        'options' => array('nofooter' => true, 'nonavbar' => true),
         'defaultregion' => 'side-post',
-    ],
-];
+    ),
+);
 
 // Select the opposite sidebar when switch to RTL.
-$THEME->blockrtlmanipulations = [
+$THEME->blockrtlmanipulations = array(
     'side-pre' => 'side-post',
-    'side-post' => 'side-pre',
-];
+    'side-post' => 'side-pre'
+);
 
-$THEME->prescsscallback = 'theme_adaptable_pre_scss';
-$THEME->scss = function (theme_config $theme) {
+$THEME->scss = function(theme_config $theme) {
     return theme_adaptable_get_main_scss_content($theme);
 };
 
 $THEME->csspostprocess = 'theme_adaptable_process_customcss';
 $THEME->haseditswitch = false;
-$THEME->usescourseindex = true;
-$THEME->iconsystem = '\\theme_adaptable\\output\\icon_system_fontawesome';
+$THEME->usescourseindex = false;

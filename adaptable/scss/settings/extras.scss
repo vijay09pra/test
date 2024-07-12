@@ -482,6 +482,11 @@ ul.teachers {
     border-radius: 0 0 0 0;
 }
 
+.showblockicons .block_sitenews .header .title h2:before {
+    content: "\f1ea";
+    font-family: "FontAwesome";
+}
+
 // Lesson Activity.
 #page-mod-lesson-edit .singleselect {
     width: auto;
@@ -508,7 +513,7 @@ ul.teachers {
     background-image: none;
     background-color: [[setting:buttonhovercolor]];
     box-shadow: 0 -2px 0 0 rgba(0, 0, 0, 0.5) inset;
-    color: [[setting:buttontexthovercolor]] !important;
+    color: [[setting:buttontextcolor]] !important;
 }
 
 .box {
@@ -1167,13 +1172,6 @@ html[xmlns] .slides {
     width: [[setting:fullscreenwidth]];
 }
 
-@media (max-width: 991px) {
-    .fullin.narrow .container,
-    .fullin.standard .container {
-        width: 100%;
-    }
-}
-
 .sbll {
     display: none;
 }
@@ -1187,7 +1185,16 @@ html[xmlns] .slides {
 }
 
 @media (min-width: 992px) {
-    .zoomin #region-main-box {
+    .zoomin #block-region-side-post {
+        display: none;
+        height: 0;
+        margin-left: 0;
+        min-height: 0;
+        overflow: hidden;
+        width: 0;
+    }
+
+    .zoomin #region-main {
         flex: 0 0 100%;
         max-width: 100%;
     }
@@ -1205,14 +1212,10 @@ html[xmlns] .slides {
     display: none;
 }
 
-.fpcombocollapse {
-    .fp-chevron:before {
-        content: "\f077"; // chevron-up <- chevron-up.
-        font-family: "Font Awesome 6 Free";
-    }
+.fpcombocollapse .fp-chevron:before {
+    content: "\f077";
+}
 
-    &.collapsed .fp-chevron:before {
-        content: "\f078"; // chevron-down <- chevron-down.
-        font-family: "Font Awesome 6 Free";
-    }
+.fpcombocollapse.collapsed .fp-chevron:before {
+    content: "\f078";
 }

@@ -1,33 +1,5 @@
-//
-// This file is part of Adaptable theme for moodle
-//
-// Moodle is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-//
-// Moodle is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-//
-//
-// Adaptable Bootstrap opt in functions JS file
-//
-// @package    theme_adaptable
-// @copyright  2015-2019 Jeremy Hopkins (Coventry University)
-// @copyright  2015-2019 Fernando Acedo (3-bits.com)
-// @copyright  2018-2019 Manoj Solanki (Coventry University)
-// @copyright  2019 G J Barnard
-//               {@link https://moodle.org/user/profile.php?id=442195}
-//               {@link https://gjbarnard.co.uk}
-// @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later.
-
 /* jshint ignore:start */
-define(['jquery', 'theme_adaptable/util', 'core/log'], function($, AdaptableUtil, log) {
+define(['jquery', 'core/log'], function($, log) {
     "use strict"; // ...jshint ;_; !!!
 
     log.debug('Adaptable Bootstrap AMD opt in functions');
@@ -36,199 +8,134 @@ define(['jquery', 'theme_adaptable/util', 'core/log'], function($, AdaptableUtil
         init: function(data) {
             $(document).ready(function($) {
 
-                var body = $("body");
                 // Get the navbar, if present.
                 var navbar = document.getElementById("main-navbar");
 
-                if (data.stickynavbar) {
+                if (data.stickynavbar && navbar !== null) {
                     /* New way to handle sticky navbar requirement.
-                       Simply taken from https://www.w3schools.com/howto/howto_js_navbar_sticky.asp. */
+                      Simply taken from https://www.w3schools.com/howto/howto_js_navbar_sticky.asp. */
 
-                    const screenmd = 992;
-                    const screensm = 768;
-                    var windowWidth = $(window).width();
-                    var currentWindowSize;
-                    if (windowWidth < screensm) {
-                        currentWindowSize = 1;
-                    } else if (windowWidth < screenmd) {
-                        currentWindowSize = 2;
-                    } else {
-                        currentWindowSize = 3;
-                    }
+                    // Initial sticky position.
+                    var sticky = navbar.offsetTop;
 
                     // Container.
                     var header = document.getElementById("adaptable-page-header-wrapper");
-                    var aboveHeader = document.getElementById("header1");
-                    if (!aboveHeader) {
-                        aboveHeader = document.getElementById("header2");
-                    }
 
-                    // Drawers.
-                    var courseIndex = document.getElementById("theme_adaptable-drawers-courseindex");
-                    var sidePost = document.getElementById("theme_adaptable-drawers-sidepost");
-                    var drawerTogglers = document.getElementsByClassName("drawer-toggler");
-
-                    // Page.
-                    var page = document.getElementById("page");
-
-                    // Adjustments.
-                    var pageScrollTop = page.scrollTop;
-                    var currentPageScrollTop = pageScrollTop;
-                    var headerHeight = 0;
-                    var headerNoNavbar = 0;
-                    var navbarHeight = 0;
-                    if (navbar !== null) {
-                        navbarHeight = navbar.getBoundingClientRect().height;
-                    }
-                    var aboveHeaderHeight = aboveHeader.getBoundingClientRect().height;
-
-                    var drawerPaddingTop = 0;
-                    var newDrawerPaddingTop = 0;
-                    var pageMarginTop = 0;
-                    var newPageMarginTop = 0;
-                    var headerTop = 0;
-                    var newHeaderTop = 0;
-
-                    var isFixed = 0;
-                    /* Ok, here's an odd one... desktops need to use the 'inner' variables and mobiles the 'outer'
-                       to be accurate! But... I've (GB) found that the jQuery height and width functions adapt and
-                       report close to correct values regardless of device, so use them instead without complicated
-                       device detection here!  Update: postion:fixed does not work on mobiles at the moment so won't
-                       be for such, left comment for future info. */
-
-                    /* Top navbar stickyness.
-                    As per above comments, some issues noted with using CSS position: fixed, but these seem to mostly be constrained
-                    to older browsers (inc. mobile browsers). May need to revisit!
-                    https://caniuse.com/#feat=css-fixed */
-                    if (windowWidth < screenmd) {
-                        header.classList.remove("sticky");
-                        body.addClass("page-header-margin");
-                        isFixed = 1;
-                    } else {
-                        header.classList.add("sticky");
-                        body.removeClass("page-header-margin");
-                    }
-
-                    var makeNavbarSticky = function(update = false) {
-                        pageScrollTop = page.scrollTop;
-
-                        if (windowWidth < screenmd) {
-                            if ((!update) && (currentPageScrollTop == aboveHeaderHeight) && (pageScrollTop >= aboveHeaderHeight)) {
-                                return;
-                            }
-                            pageScrollTop = aboveHeaderHeight;
-                            newHeaderTop = 0;
-                            newPageMarginTop = 0;
-                        } else {
-                            if ((!update) && (currentPageScrollTop == headerNoNavbar) && (pageScrollTop >= headerNoNavbar)) {
-                                return;
-                            }
-                            if (update) {
-                                // Just changed from <= screenmd.
-                                headerHeight = header.getBoundingClientRect().height;
-                                if (navbar !== null) {
-                                    navbarHeight = navbar.getBoundingClientRect().height;
-                                } // Else will never change from 0 at init!
-                                headerNoNavbar = headerHeight - navbarHeight;
-                            }
-                            if (pageScrollTop > headerNoNavbar) {
-                                pageScrollTop = headerNoNavbar;
-                            }
-                            newHeaderTop = -pageScrollTop;
-                            newPageMarginTop = headerHeight - pageScrollTop;
-                        }
-                        currentPageScrollTop = pageScrollTop;
-
-                        if ((update) || (newHeaderTop != headerTop)) {
-                            header.style.top = newHeaderTop + 'px';
-                            headerTop = newHeaderTop;
-                        }
-                        if ((update) || (newPageMarginTop != pageMarginTop)) {
-                            page.style.marginTop = newPageMarginTop + 'px';
-                            pageMarginTop = newPageMarginTop;
-                        }
-
-                        if ((courseIndex) || (sidePost)) {
-                            if (windowWidth < screenmd) {
-                                newDrawerPaddingTop = 0;
+                    /* Add the sticky class to the navbar when you reach its scroll position.
+                       Remove "sticky" when you leave the scroll position. */
+                    var makeNavbarSticky = function() {
+                        if (sticky > 0) {
+                            if (window.pageYOffset >= sticky) {
+                                if (isSticky === false) {
+                                    navbar.classList.add("adaptable-navbar-sticky");
+                                    header.style.paddingTop = navbar.offsetHeight + 'px';
+                                    isSticky = true;
+                                }
                             } else {
-                                newDrawerPaddingTop = headerHeight - pageScrollTop;
-                            }
-                            if ((update) || (newDrawerPaddingTop != drawerPaddingTop)) {
-                                drawerPaddingTop = newDrawerPaddingTop;
-                                if (courseIndex) {
-                                    courseIndex.style.paddingTop = drawerPaddingTop + 'px';
-                                }
-                                if (sidePost) {
-                                    sidePost.style.paddingTop = drawerPaddingTop + 'px';
-                                }
-                                if ((courseIndex) || (sidePost)) {
-                                    if (windowWidth < screenmd) {
-                                        for (let dt = 0; dt < drawerTogglers.length; dt++) {
-                                            drawerTogglers[dt].style.top = null;
-                                        }
-                                    } else {
-                                        for (let dt = 0; dt < drawerTogglers.length; dt++) {
-                                            drawerTogglers[dt].style.top = (drawerPaddingTop + 22) + 'px';
-                                        }
-                                    }
+                                if (isSticky === true) {
+                                    navbar.classList.remove("adaptable-navbar-sticky");
+                                    header.style.paddingTop = '0px';
+                                    isSticky = false;
                                 }
                             }
                         }
                     };
-                    makeNavbarSticky(true);
-                    if (courseIndex) {
-                        courseIndex.classList.remove("d-none");
-                    }
-                    if (sidePost) {
-                        sidePost.classList.remove("d-none");
-                    }
+
+                    // Adjust sticky if 0 when window resizes.
+                    var checkSticky = function() {
+                        if (sticky === 0) {
+                            sticky = navbar.offsetTop;
+                            isSticky = (window.pageYOffset < sticky);
+                            // Check if we are already down the page because of an anchor etc.
+                            makeNavbarSticky();
+                        }
+                    };
 
                     // When the user scrolls the page, execute makeNavbarSticky().
-                    page.onscroll = function() {makeNavbarSticky();};
+                    window.onscroll = function() {makeNavbarSticky();};
 
-                    $(window).resize(function() {
-                        windowWidth = $(window).width();
-                        if (windowWidth < screensm) {
-                            if (currentWindowSize != 1) {
-                                makeNavbarSticky(true);
-                                currentWindowSize = 1;
-                            }
-                        } else if (windowWidth < screenmd) {
-                            if (currentWindowSize != 2) {
-                                makeNavbarSticky(true);
-                                currentWindowSize = 2;
-                            }
-                        } else {
-                            if (currentWindowSize != 3) {
-                                currentWindowSize = 3;
-                            }
-                            // At screenmd and above, window width changes can change the height of the header.
-                            makeNavbarSticky(true);
-                        }
-                        if (windowWidth < screenmd) {
-                            if (isFixed === 0) {
-                                header.classList.remove("sticky");
-                                body.addClass("page-header-margin");
-                                isFixed = 1;
-                            }
-                        } else {
-                            if (isFixed === 1) {
-                                header.classList.add("sticky");
-                                body.removeClass("page-header-margin");
-                                isFixed = 0;
-                            }
-                        }
-                    });
+                    // When the page changes size, check the sticky.
+                    window.onresize = function() {checkSticky();};
+
+                    // Changed?
+                    var isSticky = (window.pageYOffset < sticky); // Initial inverse logic to cause first check to work.
+
+                    // Check if we are already down the page because of an anchor etc.
+                    makeNavbarSticky();
                 }
 
-                $('.moodlewidth').click(function() {
-                    if (body.hasClass('fullin') ) {
-                        body.removeClass('fullin');
-                        AdaptableUtil.setUserPreference('theme_adaptable_full', 'nofull');
+                var screenmd = 979;
+
+                var isFixed = 0;
+                /* Ok, here's an odd one... desktops need to use the 'inner' variables and mobiles the 'outer' to be accurate!
+                But... I've (GB) found that the jQuery height and width functions adapt and report close to correct values
+                regardless of device, so use them instead without complicated device detection here!
+                Update: postion:fixed does not work on mobiles at the moment so won't be for such, left comment for future info. */
+
+                /* Top navbar stickyness.
+                   As per above comments, some issues noted with using CSS position: fixed, but these seem to mostly be constrained
+                   to older browsers (inc. mobile browsers). May need to revisit!
+                   https://caniuse.com/#feat=css-fixed */
+                var stickything = $(".stickything");
+                var body = $("body");
+                if ($(window).width() <= screenmd) {
+                    stickything.addClass("fixed-top");
+                    body.addClass("page-header-margin");
+                    isFixed = 1;
+                } else {
+                    stickything.removeClass("fixed-top");
+                    body.removeClass("page-header-margin");
+                }
+
+                /* If you want these classes to toggle when a desktop user shrinks the browser width to
+                   an xs width - or from xs to larger. */
+                $(window).resize(function() {
+                    if ($(window).width() <= screenmd) {
+                        if (isFixed === 0) {
+                            stickything.addClass("fixed-top");
+                            body.addClass("page-header-margin");
+                            isFixed = 1;
+                        }
                     } else {
-                        body.addClass('fullin');
-                        AdaptableUtil.setUserPreference('theme_adaptable_full', 'fullin');
+                        if (isFixed === 1) {
+                            stickything.removeClass("fixed-top");
+                            body.removeClass("page-header-margin");
+                            isFixed = 0;
+                        }
+                    }
+                });
+
+                var showsidebaricon = $("#showsidebaricon");
+                if (showsidebaricon.length) {
+                    // Using 'css' and not 'offset' function as latter seems unreliable on mobiles as changes the value!
+                    showsidebaricon.css({ top: ($(window).height() / 2) + 'px'});
+                }
+
+                $(window).resize(function() {
+                    if ($(window).width() > screenmd) {
+                        var navDrawer = $("#nav-drawer");
+                        if (navDrawer.length) {
+                            if (!navDrawer.hasClass("closed")) {
+                                navDrawer.addClass("closed");
+                                navDrawer.attr("aria-hidden", "true");
+                                $("#drawer").attr("aria-expanded", "false");
+                                var side = $('#drawer').attr('data-side');
+                                body.removeClass("drawer-open-" + side);
+                            }
+                        }
+                    }
+                    if (showsidebaricon.length) {
+                        showsidebaricon.css({ top: ($(window).height() / 2) + 'px'});
+                    }
+                });
+
+                $('.moodlewidth').click(function() {
+                    if ($('#page').hasClass('fullin') ) {
+                        $('#page').removeClass('fullin');
+                        M.util.set_user_preference('theme_adaptable_full', 'nofull');
+                    } else {
+                        $('#page').addClass('fullin');
+                        M.util.set_user_preference('theme_adaptable_full', 'fullin');
                     }
                 });
 

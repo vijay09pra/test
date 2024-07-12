@@ -86,6 +86,16 @@ a:focus {
     outline-offset: -2px;
 }
 
+// Lists.
+#adaptable-page-header-wrapper {
+    .dropdown-menu > li > a:hover,
+    .dropdown-menu > li > a:focus,
+    .dropdown-submenu:hover > a,
+    .dropdown-submenu:focus > a {
+        background-image: none;
+    }
+}
+
 // Text Selection.
 ::selection,
 ::-moz-selection {
@@ -104,6 +114,10 @@ fieldset {
 
 .mform fieldset.collapsible legend a.fheader {
     margin-left: 0;
+}
+
+.form-inline {
+    margin: 5px 0;
 }
 
 .col-form-label.d-inline {
@@ -193,24 +207,8 @@ div.signuppanel h2 {
 // Header.
 #adaptable-page-header-wrapper {
     background-color: [[setting:headerbkcolor2]];
-    color: [[setting:headertextcolor2]];
+    width: 100%;
     z-index: 10;
-
-    &.sticky {
-        left: 0;
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index: $zindex-sticky;
-    }
-
-    // Lists.
-    .dropdown-menu > li > a:hover,
-    .dropdown-menu > li > a:focus,
-    .dropdown-submenu:hover > a,
-    .dropdown-submenu:focus > a {
-        background-image: none;
-    }
 }
 
 #page-header {
@@ -237,15 +235,15 @@ div.signuppanel h2 {
     margin: 5px 15px 10px 0;
 }
 
-#headertitle,
-#headertitle a,
-#headertitle p,
-#headertitle h1,
-#headertitle h2,
-#headertitle h3,
-#headertitle h4,
-#headertitle h5,
-#headertitle h6 {
+#sitetitle,
+#sitetitle a,
+#sitetitle p,
+#sitetitle h1,
+#sitetitle h2,
+#sitetitle h3,
+#sitetitle h4,
+#sitetitle h5,
+#sitetitle h6 {
     color: [[setting:fonttitlecolor]];
 
     font-family: [[setting:fonttitlename]], sans-serif;
@@ -273,16 +271,18 @@ div.signuppanel h2 {
 .socialicons {
     padding-top: [[setting:socialpaddingtop]];
     a {
-        // Make at least 29px, values look odd but on inspection they are needed to be so for FontAwesome.
-        font-size: [[setting:socialsize]];
-        line-height: [[setting:socialsize]];
         padding-left: [[setting:socialpaddingsidehalf]]px;
         padding-right: [[setting:socialpaddingsidehalf]]px;
         &:first-of-type {
-            margin-left: [[setting:socialpaddingsidehalf]]px;
+            padding-left: [[setting:socialpaddingside]]px;
         }
         &:last-of-type {
-            margin-right: [[setting:socialpaddingsidehalf]]px;
+            padding-right: [[setting:socialpaddingside]]px;
+        }
+        i {
+            // Make at least 29px, values look odd but on inspection they are needed to be so for FontAwesome.
+            font-size: [[setting:socialsize]];
+            line-height: [[setting:socialsize]];
         }
     }
 }
@@ -350,7 +350,8 @@ a.component-expand .badge {
     margin: 0.8em 0.8em 0.4em 0.8em;
 }
 
-.navbar .count-container {
+.badge,
+.count-container {
     background-color: [[setting:msgbadgecolor]];
 }
 
@@ -461,17 +462,9 @@ a.component-expand .badge {
     margin-top: 20px;
 }
 
-.flexibleblocks,
 #marketblocks {
     background-color: [[setting:marketblocksbackgroundcolor]];
     padding-bottom: 10px;
-
-    h3 {
-        font-size: 24px;
-        font-weight: normal;
-        line-height: 48px;
-        margin: 10px auto;
-    }
 }
 
 #marketblocks .internalmarket {
@@ -481,34 +474,21 @@ a.component-expand .badge {
     text-align: center;
 }
 
-.marketimage { // Deprecated.
+.marketimage {
     border: 0;
     display: block;
     width: 100%;
 }
 
-.flexiblerow,
+#marketblocks h3 {
+    font-size: 24px;
+    font-weight: normal;
+    line-height: 48px;
+    margin: 10px auto;
+}
+
 .marketrow {
     margin-top: 20px;
-}
-
-.editing-flexible-blocks,
-.flexible-blocks-overflow {
-    column-gap: 0.25rem;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: start;
-
-    .block {
-        flex: 0 0 calc(25% - 0.5rem);
-        max-width: 25%;
-    }
-}
-
-.flexible-blocks-overflow {
-    margin-right: -15px;
-    margin-left: -15px;
 }
 
 img.emoticon {
@@ -703,41 +683,56 @@ langmenu a:hover {
 }
 
 .breadcrumb {
-    background-color: [[setting:breadcrumb]];
-    padding: 0 10px;
-    li {
-        margin: 5px 0;
-        text-shadow: none;
-        span {
-            a {
-                text-decoration: none;
-            }
-            &.divider {
-                border-bottom: 0 solid [[setting:maincolor]];
-                display: none !important;
-            }
-        }
-        a.firstli {
-            padding-left: 15px;
-            padding-right: 20px;
-        }
-    }
-    > a {
-        display: inline-block;
-        margin: 5px 0;
-    }
-    ul i,
-    li.lastli span {
-        color: [[setting:breadcrumbtextcolor]];
-        text-decoration: none;
-    }
+    background: none !important;
+    background-color: [[setting:breadcrumb]] !important;
+    padding: 5px;
+}
+
+.breadcrumb li {
+    margin: 5px 0;
+    text-shadow: none;
+}
+
+.breadcrumb li span a {
+    text-decoration: none;
+}
+
+.breadcrumb li span.divider {
+    display: none !important;
+}
+
+.breadcrumb > a {
+    display: inline-block;
+    margin: 5px 0;
+}
+
+.breadcrumb .fa {
+    display: inline;
+    margin: 12px 0;
 }
 
 .separator {
     margin: 9px;
-    i {
-        margin-left: 5px;
-    }
+}
+
+.separator i {
+    margin-left: 5px;
+}
+
+.breadcrumb ul i,
+.breadcrumb li.lastli span {
+    color: [[setting:breadcrumbtextcolor]];
+    text-decoration: none;
+}
+
+.breadcrumb li a.firstli {
+    padding-left: 15px;
+    padding-right: 20px;
+}
+
+.breadcrumb li span.divider {
+    border-bottom: 0 solid [[setting:maincolor]];
+    display: none !important;
 }
 
 .breadcrumb-button {
@@ -889,15 +884,12 @@ table.mceLayout2 iframe {
     text-align: right;
 }
 
-.form-label {
-    label,
-    > p {
-        color: [[setting:fontheadercolor]];
-        font-family: [[setting:fontheadername]], sans-serif !important;
-        font-size: 18px;
-        font-weight: [[setting:fontheaderweight]] !important;
-        padding-bottom: 10px;
-    }
+.form-label label {
+    color: [[setting:fontheadercolor]];
+    font-family: [[setting:fontheadername]], sans-serif !important;
+    font-size: 18px;
+    font-weight: [[setting:fontheaderweight]] !important;
+    padding-bottom: 10px;
 }
 
 .form-colorpicker input {
@@ -915,10 +907,28 @@ input[type="radio"], input[type="checkbox"] {
     margin-right: 1px;
 }
 
+#adminsettings h3 {
+    color: [[setting:fontheadercolor]];
+    display: block;
+    font-family: [[setting:fontheadername]], sans-serif !important;
+    font-size: 24px;
+    font-weight: [[setting:fontheaderweight]] !important;
+    line-height: 40px;
+    margin-bottom: 20px;
+    margin-top: 40px;
+    padding: 0;
+    width: 100%;
+}
+
 #region-main {
     background-color: [[setting:regionmaincolor]];
     border: none;
     transition: all .5s ease-in-out;
+}
+
+#region-main
+.pagelayout-mydashboard #region-main {
+    padding: 0 5px; // Override Boost.
 }
 
 // Lang menu.
@@ -1233,8 +1243,7 @@ input[type="radio"], input[type="checkbox"] {
 }
 
 #page-navbar .breadcrumb-button {
-    display: block;
-    text-align: right;
+    display: inline;
 }
 
 .user-enroller-panel {
@@ -1322,10 +1331,10 @@ button.search-box__button {
 }
 
 .search-box__button:hover {
-    background-color: [[setting:buttonhovercolor]];
+    background: [[setting:buttonhovercolor]];
     border: 1px solid rgba(#000, .05);
     box-shadow: 1px 1px 2px rgba(255, 255, 255, .2);
-    color: [[setting:buttontexthovercolor]];
+    color: [[setting:buttontextcolor]];
     opacity: 0.9;
     text-decoration: none;
     text-shadow: -1px -1px 0 [[setting:buttonhovercolor]];
@@ -1360,10 +1369,22 @@ div.questionbankwindow.block {
     transition: width .5s ease-in-out;
 }
 
+#block-region-side-post {
+    transition: all .5s ease-in-out;
+}
+
+.flex-row #block-region-side-post {
+    padding-right: 0;
+}
+
 #zoominicon {
     cursor: pointer;
     padding-left: 4px !important;
     padding-right: 4px !important;
+}
+
+#showsidebaricon {
+    display: none;
 }
 
 .fselect #id_courses {
@@ -1800,7 +1821,7 @@ a.dimmed_text:visited,
 .usersuspended a:visited,
 .dimmed_category,
 .dimmed_category a {
-    color: [[setting:dimmedtextcolor]] !important;
+    color: #999 !important;
 }
 
 .activity img.iconlarge {
@@ -1881,44 +1902,13 @@ a.dimmed_text:visited,
 #savediscardsection {
     background-color: #eee;
     filter: alpha(opacity=80);
+    min-width: 100%;
     min-height: 30px;
     opacity: 0.8;
     padding: 10px;
     position: fixed; // For IE8 and earlier.
     top: 10px;
     width: 100%;
-}
-
-@media (min-width: 992px) {
-    #page.drawers {
-        #savediscardsection {
-            margin-left: -1.25rem;
-            padding-left: 1.5rem;
-            padding-right: 1.5rem;
-        }
-        &.show-drawer-left,
-        &.show-drawer-right {
-            #savediscardsection {
-                min-width: auto;
-            }
-        }
-        &.show-drawer-left {
-            #savediscardsection {
-                margin-left: 0;
-                width: calc(100% - #{$drawer-left-width});
-            }
-        }
-        &.show-drawer-right {
-            #savediscardsection {
-                width: calc(100% - #{$drawer-right-width});
-            }
-        }
-        &.show-drawer-left.show-drawer-right {
-            #savediscardsection {
-                width: calc(100% - #{$drawer-left-width} - #{$drawer-right-width});
-            }
-        }
-    }
 }
 
 img.smallicon {
@@ -1990,6 +1980,33 @@ img.smallicon {
 // Adaptable 2.0.
 .p-0 {
     background-color: transparent !important;
+}
+
+.row-fluid .col-9 {
+    flex: none;
+    max-width: none;
+    min-height: inherit;
+    width: 74.46808511%;
+    *width: 74.41489362%;
+}
+
+.row-fluid .col-3 {
+    width: 24.40425532%;
+    *width: 24.35106383%;
+}
+
+@media (max-width: 767px) {
+    .row-fluid .col-3 {
+        flex: none;
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .row-fluid .col-9 {
+        flex: none;
+        max-width: none;
+        width: 100%;
+    }
 }
 
 .form-inline input.form-control[type=text] {
@@ -2136,17 +2153,12 @@ img.smallicon {
     color: #000 !important;
 
 }
-
-.text-danger .icon,
+// Danger icon.
+.text-danger,
 .notconnected,
 .que .validationerror,
 .text-error {
     color: [[setting:dangericoncolor]] !important;
-}
-
-.notconnected,
-.que .validationerror,
-.text-error {
     margin-right: 1px !important;
     margin-top: 8px !important;
 }

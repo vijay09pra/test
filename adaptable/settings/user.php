@@ -19,27 +19,18 @@
  *
  * @package    theme_adaptable
  * @copyright  &copy; 2019 - Coventry University
- * @copyright  2019 G J Barnard
- *               {@link https://moodle.org/user/profile.php?id=442195}
- *               {@link https://gjbarnard.co.uk}
- * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later.
+ * @author     G J Barnard - {@link http://moodle.org/user/profile.php?id=442195}
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die;
 
 // User profile.
 if ($ADMIN->fulltree) {
-    $page = new \theme_adaptable\admin_settingspage(
-        'theme_adaptable_user',
-        get_string('usersettings', 'theme_adaptable'),
-        true
-    );
+    $page = new admin_settingpage('theme_adaptable_user', get_string('usersettings', 'theme_adaptable'));
 
-    $page->add(new admin_setting_heading(
-        'theme_adaptable_user',
-        get_string('usersettingsheading', 'theme_adaptable'),
-        format_text(get_string('usersettingsdesc', 'theme_adaptable'), FORMAT_MARKDOWN)
-    ));
+    $page->add(new admin_setting_heading('theme_adaptable_user', get_string('usersettingsheading', 'theme_adaptable'),
+        format_text(get_string('usersettingsdesc', 'theme_adaptable'), FORMAT_MARKDOWN)));
 
     // Custom course title.
     $name = 'theme_adaptable/customcoursetitle';
@@ -59,7 +50,7 @@ if ($ADMIN->fulltree) {
     $name = 'theme_adaptable/enabletabbedprofile';
     $title = get_string('enabletabbedprofile', 'theme_adaptable');
     $description = get_string('enabletabbedprofiledesc', 'theme_adaptable');
-    $default = false;
+    $default = true;
     $setting = new admin_setting_configcheckbox($name, $title, $description, $default, true, false);
     $page->add($setting);
 
@@ -67,7 +58,7 @@ if ($ADMIN->fulltree) {
     $name = 'theme_adaptable/enabledtabbedprofileeditprofilelink';
     $title = get_string('enabledtabbedprofileeditprofilelink', 'theme_adaptable');
     $description = get_string('enabledtabbedprofileeditprofilelinkdesc', 'theme_adaptable');
-    $default = false;
+    $default = true;
     $setting = new admin_setting_configcheckbox($name, $title, $description, $default, true, false);
     $page->add($setting);
 
@@ -75,7 +66,7 @@ if ($ADMIN->fulltree) {
     $name = 'theme_adaptable/enabledtabbedprofileuserpreferenceslink';
     $title = get_string('enabledtabbedprofileuserpreferenceslink', 'theme_adaptable');
     $description = get_string('enabledtabbedprofileuserpreferenceslinkdesc', 'theme_adaptable');
-    $default = false;
+    $default = true;
     $setting = new admin_setting_configcheckbox($name, $title, $description, $default, true, false);
     $page->add($setting);
 

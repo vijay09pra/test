@@ -40,16 +40,47 @@
 }
 
 // Remove caret from main navbar menu.
-#adaptable-page-header-wrapper #main-navbar .dropdown-toggle::after {
+#adaptable-page-header-wrapper #main-navbar .dropdown-toggle::after,
+#adaptable-page-header-wrapper #nav-drawer .dropdown-toggle::after {
     content: none;
 }
 
-#adaptable-page-header-wrapper {
-    .navbar-nav .dropdown li a .icon,
-    .above-header a .icon {
-        margin-right: 2px;
-        text-align: center;
-    }
+.adaptable-page-header-wrapper#affix {
+    top: 0;
+    width: 100%;
+    z-index: 1010;
+}
+
+// General menu styling.
+
+// Sticky navbar.
+
+// The sticky class is added to the navbar with JS when it reaches its scroll position.
+#adaptable-page-header-wrapper .adaptable-navbar-sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+// Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
+#adaptable-page-header-wrapper .adaptable-navbar-sticky + .adaptable-navbar-sticky-content-padding {
+    padding-top: 60px;
+}
+
+// Page content */
+#adaptable-page-header-wrapper .adaptable-navbar-sticky-content-padding {
+    padding: 16px;
+}
+
+
+#adaptable-page-header-wrapper .navbar-nav .dropdown li a i,
+#adaptable-page-header-wrapper .above-header a i {
+    margin-right: 2px;
+    text-align: center;
+}
+
+#adaptable-page-header-wrapper .above-header a i {
+    width: 22px;
 }
 
 // New main navbar styling */
@@ -75,10 +106,6 @@
     transition: all [[setting:navbardropdowntransitiontime]];
 }
 
-#adaptable-page-header-wrapper #main-navbar .navbar-nav {
-    margin-left: -[[setting:menufontpadding]];
-}
-
 #adaptable-page-header-wrapper .dropdown-menu ul {
     margin: 0;
     padding: 0;
@@ -92,8 +119,7 @@
 #adaptable-page-header-wrapper #main-navbar ul.navbar-nav > li > a.nav-link:hover,
 #adaptable-page-header-wrapper #main-navbar li div.nav-link:hover,
 #adaptable-page-header-wrapper #main-navbar li #editingbutton input[type="submit"]:hover {
-    background-color: [[setting:menubkhovercolor]];
-    color: [[setting:menufonthovercolor]];
+    background-color: [[setting:menuhovercolor]];
 }
 
 #adaptable-page-header-wrapper #main-navbar .input-group {
@@ -120,10 +146,8 @@
     padding: .3rem 0.65rem;
 }
 
-#adaptable-page-header-wrapper .above-header .nav-link > .fa,
-#adaptable-page-header-wrapper .above-header .nav-link > .fas,
-#adaptable-page-header-wrapper .above-header .navbar-nav > li > a,
-#adaptable-page-header-wrapper .above-header .navbar-nav > li .usermenu .dropdown-toggle {
+#adaptable-page-header-wrapper .above-header .nav-link > i,
+#adaptable-page-header-wrapper .above-header .navbar-nav > li > a {
     color: [[setting:headertextcolor]];
 }
 
@@ -142,6 +166,7 @@
 }
 
 #adaptable-page-header-wrapper .nav-link {
+    color: inherit;
     padding: .1rem .2rem .1rem .2rem;
 }
 
@@ -168,6 +193,56 @@
 
 #adaptable-page-header-wrapper .above-header a.dropdown-toggle {
     margin-top: 2px;
+}
+
+// New menus styles */
+.newmenus {
+    font-size: [[setting:topmenufontsize]];
+    height: 26px;
+    margin-left: 20px;
+    position: relative;
+}
+
+.newmenus .dropdown-menu .dropdown-menu {
+    left: 100%;
+}
+
+.newmenus .dropdown-toggle {
+    background-color: transparent !important;
+    color: [[setting:headertextcolor]] !important;
+}
+
+.newmenus .dropdown-menu li a {
+    color: [[setting:maincolor]] !important;
+    font-size: 13px;
+    font-weight: 400;
+    padding: 3px 10px;
+}
+
+.newmenus .dropdown-menu li:hover a {
+    background-color: #eee;
+}
+
+.newmenus .dropdown-toggle:hover,
+.newmenus .dropdown-toggle:active,
+.pull-left .usermenu2.nav a:hover {
+    background-color: transparent !important;
+}
+
+.newmenus .dropdown-toggle::after {
+    color: [[setting:headertextcolor]];
+    content: "\f107";
+    font-family: "Font Awesome";
+    font-weight: normal;
+    margin-left: 5px;
+}
+
+.newmenus .dropdown-menu .dropdown-toggle::after {
+    color: transparent;
+}
+
+.menutitle {
+    height: 100%;
 }
 
 // The Overlay (background) */
@@ -281,6 +356,10 @@
     overflow-y: auto;
 }
 
+.adaptable-navbar-sticky #region-main-settings-menu .dropdown-menu {
+    max-height: calc(100vh - 44px);
+}
+
 .dropdown-menu.fade {
     display: block;
     opacity: 0;
@@ -314,16 +393,6 @@
     color: [[setting:navbardropdowntexthovercolor]];
 }
 
-// Add dropdown menu items styles for each theme color (mantainning default hover colour for contrast).
-@each $color, $value in $theme-colors {
-    .dropdown-item.text-#{$color} {
-        color: $value;
-        &:hover {
-            color: [[setting:navbardropdowntexthovercolor]] !important; /* stylelint-disable-line declaration-no-important */
-        }
-    }
-}
-
 .dropdown-item:focus-within a {
     color: [[setting:navbardropdowntexthovercolor]];
 }
@@ -334,9 +403,6 @@
 .dropdown-submenu > a
 #adaptable-page-header-wrapper .dropdown-menu li a {
     color: [[setting:navbardropdowntextcolor]];
-    .icon {
-        color: $dropdown-color;
-    }
 }
 
 .dropdown-item:hover > a,
@@ -459,19 +525,23 @@
     #adaptable-page-header-wrapper .above-header .btco-hover-menu ul ul.dropdown-menu {
         min-width: 60px;
     }
+
+    #adaptable-page-header-wrapper #header1.above-header .btco-hover-menu ul [id^='langmenu'] {
+        min-width: 135px;
+    }
 }
 
 .nav-link img.userpicture {
     margin-right: 0;
 }
 
-#adaptable-page-header-wrapper #main-navbar .nav-item {
-    .nav-link .fa:not(.sections-menu) {
-        margin-right: 2px;
-    }
-    &:first-of-type .nav-link .fa:not(.sections-menu) {
-        margin-left: 2px;
-    }
+
+#adaptable-page-header-wrapper button[aria-controls="nav-drawer"] {
+    font-size: 1.2em;
+}
+
+#adaptable-page-header-wrapper #main-navbar .nav-item .nav-link .fa:not(.sections-menu) {
+    margin-right: 2px;
 }
 
 #adaptable-page-header-wrapper #main-navbar .nav-item .fa-circle {
@@ -481,6 +551,17 @@
 
 #adaptable-page-header-wrapper #main-navbar .nav-item i.only {
     padding-right: 0;
+}
+
+#adaptable-page-header-wrapper #adaptable-page-header-nav-drawer button {
+    border: 0;
+    background: none;
+    color: [[setting:headertextcolor]];
+    font-size: 1.5em;
+}
+
+#adaptable-page-header-nav-drawer button {
+    cursor: pointer;
 }
 
 #adaptable-page-header-wrapper .context-header-settings-menu .icon {

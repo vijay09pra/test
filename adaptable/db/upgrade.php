@@ -18,11 +18,13 @@
  * Database upgrade.
  *
  * @package    theme_adaptable
- * @copyright  2019 G J Barnard
- *               {@link https://moodle.org/user/profile.php?id=442195}
- *               {@link https://gjbarnard.co.uk}
- * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later.
+ * @copyright  2019 G Barnard
+ * @author     G Barnard - {@link http://moodle.org/user/profile.php?id=442195}
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ *
  */
+
+defined('MOODLE_INTERNAL') || die;
 
 /**
  * Upgrade.
@@ -62,30 +64,6 @@ function xmldb_theme_adaptable_upgrade($oldversion = 0) {
 
     // Automatic 'Purge all caches'....
     purge_all_caches();
-
-    // Method check after purge to reload updated local_toolbox if needed.
-    $localtoolbox = \theme_adaptable\toolbox::get_local_toolbox();
-    if (is_object($localtoolbox)) {
-        if (method_exists($localtoolbox, 'supported_methods')) {
-            // Method check.  Will throw upgrade_exception if one or more are missing.
-            $methods = ['get_custom_js'];
-            $unsupportedmethods = $localtoolbox->supported_methods($methods, '401.0.4 - 2023102203');
-            if (!empty($unsupportedmethods)) {
-                echo $unsupportedmethods;
-            }
-        }
-    }
-
-    if ($oldversion < 2023111806) {
-        $value = get_config('theme_adaptable', 'menuhovercolor');
-        if (!empty($value)) {
-            set_config('menubkhovercolor', $value, 'theme_adaptable');
-            // Prevent replacement when upgrade has already happened in a version for an older Moodle!
-            unset_config('menuhovercolor', 'theme_adaptable');
-        }
-
-        upgrade_plugin_savepoint(true, 2023111806, 'theme', 'adaptable');
-    }
 
     return true;
 }

@@ -15,81 +15,80 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Array definitions
+ * Version details
  *
- * @package    theme_adaptable
- * @copyright  2015-2016 Jeremy Hopkins (Coventry University)
- * @copyright  2015-2016 Fernando Acedo (3-bits.com)
- * @copyright  2017-2018 Manoj Solanki (Coventry University)
- * @copyright  2020 G J Barnard
- *               {@link https://moodle.org/user/profile.php?id=442195}
- *               {@link https://gjbarnard.co.uk}
- * @license   https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later.
+ * @package   theme_adaptable
+ * @copyright 2020-2021 G J Barnard.
+ * @copyright 2015-2016 Jeremy Hopkins (Coventry University)
+ * @copyright 2015-2016 Fernando Acedo (3-bits.com)
+ * @copyright 2017-2018 Manoj Solanki (Coventry University)
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ *
  */
 defined('MOODLE_INTERNAL') || die;
 if ($ADMIN->fulltree) {
     // Pixels.
-    $from0to6px = ['0' => '0'];
+    $from0to6px = array('0' => '0');
     for ($i = 1; $i < 7; $i++) {
         $from0to6px[$i . 'px'] = $i . 'px';
     }
 
-    $from0to8px = ['0' => '0'];
+    $from0to8px = array('0' => '0');
     for ($i = 1; $i < 9; $i++) {
         $from0to8px[$i . 'px'] = $i . 'px';
     }
 
-    $from0to12px = ['0' => '0'];
+    $from0to12px = array('0' => '0');
     for ($i = 1; $i < 13; $i++) {
         $from0to12px[$i . 'px'] = $i . 'px';
     }
 
-    $from10to16px = [];
+    $from10to16px = array();
     for ($i = 10; $i < 17; $i++) {
         $from10to16px[$i . 'px'] = $i . 'px';
     }
 
-    $from0to20px = ['0' => '0'];
+    $from0to20px = array('0' => '0');
     for ($i = 1; $i < 21; $i++) {
         $from0to20px[$i . 'px'] = $i . 'px';
     }
 
-    $from10to20px = [];
+    $from10to20px = array();
     for ($i = 10; $i < 21; $i++) {
         $from10to20px[$i . 'px'] = $i . 'px';
     }
 
-    $from10to30px = [];
+    $from10to30px = array();
     for ($i = 10; $i < 31; $i++) {
         $from10to30px[$i . 'px'] = $i . 'px';
     }
 
-    $from10to30pxnovalueunit = [];
+    $from10to30pxnovalueunit = array();
     for ($i = 10; $i < 31; $i++) {
         $from10to30pxnovalueunit[$i] = $i . 'px';
     }
 
-    $from0to30px = ['0' => '0'];
+    $from0to30px = array('0' => '0');
     for ($i = 1; $i < 31; $i++) {
         $from0to30px[$i . 'px'] = $i . 'px';
     }
 
-    $from0to50px = ['0' => '0'];
+    $from0to50px = array('0' => '0');
     for ($i = 1; $i < 51; $i++) {
         $from0to50px[$i . 'px'] = $i . 'px';
     }
 
-    $from0to100px = ['0' => '0'];
+    $from0to100px = array('0' => '0');
     for ($i = 1; $i < 101; $i++) {
         $from0to100px[$i . 'px'] = $i . 'px';
     }
 
-    $from14to46px = [];
+    $from14to46px = array();
     for ($i = 14; $i < 47; $i++) {
         $from14to46px[$i . 'px'] = $i . 'px';
     }
 
-    $standardfontsize = [
+    $standardfontsize = array(
         '8px' => '8px',
         '9px' => '9px',
         '10px' => '10px',
@@ -116,89 +115,89 @@ if ($ADMIN->fulltree) {
         '72px' => '72px',
         '80px' => '80px',
         '88px' => '88px',
-        '96px' => '96px',
-    ];
+        '96px' => '96px'
+    );
 
-    $screensizeblock = [
+    $screensizeblock = array(
         'd-block' => get_string('bs4all', 'theme_adaptable'),
         'd-none d-sm-block' => new lang_string('bs4small', 'theme_adaptable'),
         'd-none d-md-block' => new lang_string('bs4medium', 'theme_adaptable'),
         'd-none d-lg-block' => new lang_string('bs4large', 'theme_adaptable'),
         'd-none d-xl-block' => new lang_string('bs4extralarge', 'theme_adaptable'),
-        'd-none' => get_string('bs4none', 'theme_adaptable'),
-    ];
+        'd-none' => get_string('bs4none', 'theme_adaptable')
+    );
 
-    $screensizeinlineblock = [
+    $screensizeinlineblock = array(
         'd-inline-block' => get_string('bs4all', 'theme_adaptable'),
         'd-none d-sm-inline-block' => new lang_string('bs4small', 'theme_adaptable'),
         'd-none d-md-inline-block' => new lang_string('bs4medium', 'theme_adaptable'),
         'd-none d-lg-inline-block' => new lang_string('bs4large', 'theme_adaptable'),
         'd-none d-xl-inline-block' => new lang_string('bs4extralarge', 'theme_adaptable'),
-        'd-none' => get_string('bs4none', 'theme_adaptable'),
-    ];
+        'd-none' => get_string('bs4none', 'theme_adaptable')
+    );
 
-    $screensizeflex = [
+    $screensizeflex = array(
         'd-flex' => get_string('bs4all', 'theme_adaptable'),
         'd-none d-sm-flex' => new lang_string('bs4small', 'theme_adaptable'),
         'd-none d-md-flex' => new lang_string('bs4medium', 'theme_adaptable'),
         'd-none d-lg-flex' => new lang_string('bs4large', 'theme_adaptable'),
         'd-none d-xl-flex' => new lang_string('bs4extralarge', 'theme_adaptable'),
-        'd-none' => get_string('bs4none', 'theme_adaptable'),
-    ];
+        'd-none' => get_string('bs4none', 'theme_adaptable')
+    );
 
     // Numbers.
-    $from20to40 = [];
+    $from20to40 = array();
     for ($i = 20; $i < 41; $i++) {
         $from20to40[$i] = $i;
     }
 
-    $from0to60inc5 = [];
+    $from0to60inc5 = array();
     for ($i = 0; $i < 61; $i += 5) {
         $from0to60inc5[$i] = $i;
     }
 
-    $choices0to12 = [];
+    $choices0to12 = array();
     for ($i = 0; $i < 13; $i++) {
         $choices0to12[$i] = $i;
     }
 
-    $from100to900 = [];
+    $from100to900 = array();
     for ($i = 100; $i < 901; $i += 100) {
         $from100to900[$i] = $i;
     }
 
     // Percentages.
-    $from0to2point5percent = [];
+    $from0to2point5percent = array();
     for ($i = 0; $i < 2.6; $i += 0.1) {
         $from0to2point5percent[$i . '%'] = $i . '%';
     }
 
-    $from95to100percent = [
+    $from95to100percent = array(
         '95%' => '95%',
         '96%' => '96%',
         '97%' => '97%',
         '98%' => '98%',
         '99%' => '99%',
         '100%' => '100%',
-    ];
+    );
 
-    $from35to80percent = [];
+    $from35to80percent = array();
     for ($i = 35; $i < 81; $i++) {
         $from35to80percent[$i . '%'] = $i . '%';
     }
 
-    $from35to100percent = [];
+    $from35to100percent = array();
     for ($i = 35; $i < 101; $i++) {
         $from35to100percent[$i . '%'] = $i . '%';
     }
 
-    $from85to110percent = [];
+    $from85to110percent = array();
     for ($i = 85; $i < 111; $i++) {
         $from85to110percent[$i . '%'] = $i . '%';
     }
 
     // Seconds.
-    $from0to1second = [];
+    $from0to1second = array();
     $floatcount = 0.0;
     for ($i = 0; $i <= 10; $i++) {
         $from0to1second[floatval($floatcount) . 's'] = floatval($floatcount) . 's';
@@ -206,31 +205,31 @@ if ($ADMIN->fulltree) {
     }
 
     // Texts.
-    $borderstyles = [
+    $borderstyles = array(
         'none' => new lang_string('none'),
         'solid' => new lang_string('solid', 'theme_adaptable'),
         'dashed' => new lang_string('dashed', 'theme_adaptable'),
         'dotted' => new lang_string('dotted', 'theme_adaptable'),
-        'double' => new lang_string('double', 'theme_adaptable'),
-    ];
+        'double' => new lang_string('double', 'theme_adaptable')
+    );
 
-    $htmltarget = [
+    $htmltarget = array(
         '_blank' => new lang_string('targetnewwindow', 'theme_adaptable'),
-        '_self' => new lang_string('targetsamewindow', 'theme_adaptable'),
-    ];
+        '_self' => new lang_string('targetsamewindow', 'theme_adaptable')
+    );
 
-    $marketblockstyles = [
+    $marketblockstyles = array(
         '' => get_string('nostyle', 'theme_adaptable'),
         'internalmarket' => new lang_string('bcustyle', 'theme_adaptable'),
-        'covtiles' => new lang_string('coventrystyle', 'theme_adaptable'),
-    ];
+        'covtiles' => new lang_string('coventrystyle', 'theme_adaptable')
+    );
 
-    $sliderstyles = [
+    $sliderstyles = array(
         'slider1' => new lang_string('sliderstyle1', 'theme_adaptable'),
-        'slider2' => new lang_string('sliderstyle2', 'theme_adaptable'),
-    ];
+        'slider2' => new lang_string('sliderstyle2', 'theme_adaptable')
+    );
 
-    $bootstrap12 = [
+    $bootstrap12 = array(
         '0-0-0-0' => new lang_string('disabled', 'theme_adaptable'),
         '12-0-0-0' => '1',
         '6-6-0-0' => '6 + 6',
@@ -245,18 +244,19 @@ if ($ADMIN->fulltree) {
         '9-3-0-0' => '9 + 3',
         '5-7-0-0' => '5 + 7',
         '7-5-0-0' => '7 + 5',
-    ];
+    );
 
-    $bootstrap12defaults = ['3-3-3-3', '4-4-4-0', '3-3-3-3', '0-0-0-0', '0-0-0-0'];
+    $bootstrap12defaults = array('3-3-3-3', '4-4-4-0', '3-3-3-3', '0-0-0-0', '0-0-0-0',
+        '0-0-0-0', '0-0-0-0', '0-0-0-0', '0-0-0-0', '0-0-0-0');
 
-    $informationblocksbuilderdefaults = ['3-3-3-3', '0-0-0-0', '0-0-0-0', '0-0-0-0', '0-0-0-0'];
-    $marketingfooterbuilderdefaults = ['3-3-3-3', '0-0-0-0', '0-0-0-0', '0-0-0-0', '0-0-0-0'];
+    $marketingfooterbuilderdefaults = array('3-3-3-3', '0-0-0-0', '0-0-0-0', '0-0-0-0', '0-0-0-0',
+        '0-0-0-0', '0-0-0-0', '0-0-0-0', '0-0-0-0', '0-0-0-0');
 
     // Adaptable Tabbed Layout changes. 0 signifies the course content or dashboard main content.
     $courselabel = new lang_string('tabbedlayouttablabelcourse', 'theme_adaptable');
     $tab1label = new lang_string('tabbedlayouttablabelcourse1', 'theme_adaptable');
     $tab2label = new lang_string('tabbedlayouttablabelcourse2', 'theme_adaptable');
-    $tabbedlayoutdefaultscourse = [
+    $tabbedlayoutdefaultscourse = array(
         '0' => get_string('disabled', 'theme_adaptable'),
         '0-1' => $courselabel . ' + ' . $tab1label,
         '1-0' => $tab1label . ' + ' . $courselabel,
@@ -264,12 +264,12 @@ if ($ADMIN->fulltree) {
         '1-0-2' => $tab1label . ' + ' . $courselabel . ' + ' . $tab2label,
         '1-2-0' => $tab1label . ' + ' . $tab2label . ' + ' . $courselabel,
         '0-2-1' => $courselabel . ' + ' . $tab2label . ' + ' . $tab1label,
-    ];
+    );
 
     $dashboardlabel = new lang_string('tabbedlayouttablabeldashboard', 'theme_adaptable');
     $tab1label = new lang_string('tabbedlayouttablabeldashboard1', 'theme_adaptable');
     $tab2label = new lang_string('tabbedlayouttablabeldashboard2', 'theme_adaptable');
-    $tabbedlayoutdefaultsdashboard = [
+    $tabbedlayoutdefaultsdashboard = array(
         '0' => get_string('disabled', 'theme_adaptable'),
         '0-1' => $dashboardlabel . ' + ' . $tab1label,
         '1-0' => $tab1label . ' + ' . $dashboardlabel,
@@ -277,16 +277,16 @@ if ($ADMIN->fulltree) {
         '1-0-2' => $tab1label . ' + ' . $dashboardlabel . ' + ' . $tab2label,
         '1-2-0' => $tab1label . ' + ' . $tab2label . ' + ' . $dashboardlabel,
         '0-2-1' => $dashboardlabel . ' + ' . $tab2label . ' + ' . $tab1label,
-    ];
+    );
 
-    $dashboardblockregionposition = [
+    $dashboardblockregionposition = array(
         'abovecontent' => new lang_string('dashblocksabovecontent', 'theme_adaptable'),
-        'belowcontent' => new lang_string('dashblocksbelowcontent', 'theme_adaptable'),
-    ];
+        'belowcontent' => new lang_string('dashblocksbelowcontent', 'theme_adaptable')
+    );
 
     // Fonts and Google ones.
-    $fontlist = [
-        'default' => new lang_string('fontdefault', 'theme_adaptable'),
+    $fontlist = array(
+        'sans-serif' => new lang_string('fontdefault', 'theme_adaptable'),
         'ABeeZee' => 'ABeeZee',
         'Abel' => 'Abel',
         'Abhaya Libre' => 'Abhaya Libre',
@@ -1563,6 +1563,6 @@ if ($ADMIN->fulltree) {
         'Zeyada' => 'Zeyada',
         'Zhi Mang Xing' => 'Zhi Mang Xing',
         'Zilla Slab' => 'Zilla Slab',
-        'Zilla Slab Highlight' => 'Zilla Slab Highlight',
-    ];
+        'Zilla Slab Highlight' => 'Zilla Slab Highlight'
+    );
 }

@@ -16,11 +16,9 @@
 
 /**
  * Overrides for behat authentication.
- *
- * @package   theme_adaptable
  * @author    Marcus Green
  * @copyright Titus Learning
- * @license   https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later.
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 // NOTE: no MOODLE_INTERNAL test here, this file may be required by behat before including /config.php.
@@ -29,19 +27,11 @@ require_once(__DIR__ . '/../../../../auth/tests/behat/behat_auth.php');
 
 /**
  * Overrides for behat authentication.
- *
- * @package   theme_adaptable
  * @author    Marcus Green
  * @copyright Titus Learning
- * @license   https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later.
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class behat_theme_adaptable_behat_auth extends behat_auth {
-    /**
-     * Logs out of the system.
-     *
-     * @Given /^I log out$/
-     * @Given I am not logged in
-     */
     public function i_log_out() {
         $this->getSession()->visit($this->locate_path('login/logout.php'));
         $this->execute('behat_forms::press_button', get_string('continue'));

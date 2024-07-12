@@ -15,19 +15,19 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Block settings
+ * Version details
  *
  * @package    theme_adaptable
- * @copyright  2015 Jeremy Hopkins (Coventry University)
- * @copyright  2015 Fernando Acedo (3-bits.com)
- * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later.
+ * @copyright 2015 Jeremy Hopkins (Coventry University)
+ * @copyright 2015 Fernando Acedo (3-bits.com)
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ *
  */
 
 defined('MOODLE_INTERNAL') || die;
 
 if ($ADMIN->fulltree) {
-    $page = new \theme_adaptable\admin_settingspage('theme_adaptable_blocks',
-        get_string('settingspageblocksettings', 'theme_adaptable'));
+    $page = new admin_settingpage('theme_adaptable_blocks', get_string('blocksettings', 'theme_adaptable'));
 
     // General.
     $name = 'theme_adaptable/settingsblocksgeneral';
